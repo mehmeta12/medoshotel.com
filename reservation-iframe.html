@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rezervasyon — Medos Hotel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --clr-primary:   #00b1c9;
+      --clr-secondary: #13508b;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Kanit', Arial, sans-serif;
+      font-size: 15px;
+      color: #333;
+    }
+    body { padding: 12px 0; }
+
+    /* Widget container */
+    #tb-reservation {
+      background: #fff;
+      font-family: 'Kanit', Arial, sans-serif !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Tatilbudur widget renk overrides */
+    .reservation-widget .btn-primary,
+    .reservation-widget .btn-submit,
+    .reservation-widget button[type="submit"] {
+      background-color: var(--clr-primary) !important;
+      border-color: var(--clr-primary) !important;
+      font-family: 'Kanit', Arial, sans-serif !important;
+    }
+    .reservation-widget a,
+    .reservation-widget .step-active,
+    .reservation-widget .price-total {
+      color: var(--clr-primary) !important;
+    }
+    .reservation-widget h1,
+    .reservation-widget h2,
+    .reservation-widget h3,
+    .reservation-widget h4 {
+      font-family: 'Kanit', Arial, sans-serif !important;
+      color: var(--clr-secondary) !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="reservation-widget hotelDetails hotelReservationSteps reservation" id="tb-reservation"></div>
+
+<script type="text/javascript">
+  var TB = {
+    data: {
+      adult:        2,
+      child:        0,
+      childAge:     [],
+      hotelId:      '91b189de2f244f7bae66fa11572c9e8e',
+      agencyId:     'b54da245017d46689f1d271c2c534e2c',
+      subsidiaryId: 0,
+      agentId:      '10227',
+      productType:  'hotel',
+      version:      Math.random(),
+      hotelPhone:   ''
+    },
+    error: function () {
+      console.error('TatilBudur widget yüklenemedi.');
+    }
+  };
+  (function (d, s, id) {
+    var js, tbjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id  = id;
+    js.src = '//www.tatilbudur.com/themes/tbnew/assets/widgets/reservation/tatilbudur-widgets.js?ver=' + TB.data.version;
+    tbjs.parentNode.insertBefore(js, tbjs);
+  }(document, 'script', 'tb-jssdk'));
+</script>
+
+</body>
+</html>

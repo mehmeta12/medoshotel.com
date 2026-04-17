@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(ls c:/Users/mehme/medoshotel/img/room-2*)"
+    ]
+  }
+}

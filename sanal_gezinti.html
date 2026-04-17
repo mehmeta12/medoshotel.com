@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr" data-title-i18n="page.tour.title">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Sanal Tur | Medos Hotel – Güzelçamlı, Kuşadası</title>
+  <meta name="description" content="Medos Hotel'i ziyaret etmeden önce 360° sanal turumuzu keşfedin. Odalar, havuz alanı, restoran ve iskeleyi interaktif olarak gezin.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.medoshotel.com/sanal_gezinti.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/additions.css">
+  <style>
+    .alt_butonlar { display: none !important; }
+    /* Tour fills the viewport below the fixed header */
+    .tour-fullscreen {
+      display: block;
+      width: 100%;
+      height: calc(100vh - var(--header-h, 70px));
+      border: none;
+      background: #0d1b2a;
+    }
+    /* Remove default section padding for tour page */
+    .tour-section {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header injected by layout.js -->
+
+  <main>
+
+    <section class="tour-section">
+      <iframe
+        id="tourFrame"
+        class="tour-fullscreen"
+        src="sanal_tur/index.htm"
+        title="Medos Hotel 360° Sanal Tur"
+        allowfullscreen
+        allow="xr-spatial-tracking; gyroscope; accelerometer">
+      </iframe>
+    </section>
+
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /* Inject Kanit font into the tour iframe (same-origin) */
+    (function () {
+      var frame = document.getElementById('tourFrame');
+      if (!frame) return;
+
+      function injectFont() {
+        try {
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          if (!doc || !doc.head) return;
+
+          /* Google Fonts link */
+          var link = doc.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap';
+          doc.head.appendChild(link);
+
+          /* Override all text with Kanit */
+          var style = doc.createElement('style');
+          style.textContent = [
+            '* { font-family: "Kanit", Arial, sans-serif !important; letter-spacing: 0.03em; }',
+            /* Nav button text */
+            'button, [class*="btn"], [class*="button"], [class*="label"] { font-weight: 500 !important; }'
+          ].join('\n');
+          doc.head.appendChild(style);
+        } catch (e) { /* cross-origin guard (no-op for same origin) */ }
+      }
+
+      frame.addEventListener('load', injectFont);
+    })();
+  </script>
+</body>
+</html>

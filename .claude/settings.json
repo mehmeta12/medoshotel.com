@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls c:/Users/mehme/medoshotel/img/Album_5*)",
+      "Bash(ls c:/Users/mehme/medoshotel/*.html)",
+      "Bash(ls c:/Users/mehme/medoshotel/img/og* c:/Users/mehme/medoshotel/img/Otel_Genel* c:/Users/mehme/medoshotel/img/Album_5*)",
+      "Bash(xargs sed *)",
+      "Bash(grep -rh \"img/\" /c/Users/mehme/medoshotel/*.html /c/Users/mehme/medoshotel/js/*.js)",
+      "Bash(grep -roh 'img/[^\"'\\\\''> ]*' /c/Users/mehme/medoshotel/*.html /c/Users/mehme/medoshotel/js/*.js)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\mehme\\medoshotel"
+    ]
+  }
+}

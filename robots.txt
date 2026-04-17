@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /docs/
+Disallow: /sanal_tur/
+
+Sitemap: https://www.medoshotel.com/sitemap.xml

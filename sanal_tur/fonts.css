@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+
+/* Map Oswald references → Kanit so existing player references pick up the brand font */
+@font-face {
+   font-family: "Oswald";
+   src: local("Kanit Regular"), local("Kanit");
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+   font-family: "Oswald";
+   src: local("Kanit Bold"), local("Kanit");
+   font-weight: bold;
+   font-style: normal;
+}
+@font-face {
+   font-family: "Oswald Regular";
+   src: local("Kanit Regular"), local("Kanit");
+   font-weight: normal;
+   font-style: normal;
+}
+
+/* Global override — ensures all player text uses Kanit */
+* {
+  font-family: 'Kanit', 'Oswald', Arial, sans-serif !important;
+  letter-spacing: 0.03em;
+}
