@@ -358,6 +358,21 @@
       'page.contact.hours': '24 Saat / 7 Gün',
       'page.contact.form_success': 'Mesajınız gönderildi. En kısa sürede dönüş yapacağız.',
 
+      /* ─────────── BLOG ─────────── */
+      'nav.blog': 'Blog',
+      'breadcrumb.blog': 'Blog',
+      'page.blog.title': 'Blog',
+      'page.blog.hero_subtitle': 'Seyahat Rehberi & Haberler',
+      'blog.read_more': 'Devamını Oku →',
+      'blog.back': '← Blog\'a Dön',
+      'blog.by': 'Medos Hotel',
+      'blog.kusadasi.title': 'Kuşadası\'nda Gezilecek Yerler (2026 Güncel Rehber)',
+      'blog.kusadasi.date': '17 Nisan 2026',
+      'blog.kusadasi.category': 'Seyahat Rehberi',
+      'blog.kusadasi.excerpt': 'Kuşadası çevresindeki en popüler gezilecek yerleri keşfedin: Dilek Yarımadası Milli Parkı, Zeus Mağarası ve Güvercin Ada Kalesi.',
+      'blog.kusadasi.cta': 'Medos Beach Hotel\'de konaklayarak bu lokasyonlara kolayca ulaşabilirsiniz.',
+      'blog.kusadasi.body': '<p>Kuşadası, Ege Bölgesi\'nin en popüler tatil destinasyonlarından biridir. Hem tarihi hem de doğal güzellikleriyle her yıl binlerce ziyaretçiyi ağırlar.</p><h2><a href="dilek_yarim_adasi_milli_park.html">Dilek Yarımadası Milli Parkı</a></h2><p>Türkiye\'nin en önemli doğal alanlarından biri olan milli park, yüzlerce bitki türüne ve zengin yaban hayatına ev sahipliği yapmaktadır. Doğa yürüyüşü ve deniz keyfi için ideal bir noktadır.</p><h2><a href="zeus_magarasi.html">Zeus Mağarası</a></h2><p>Mitolojik hikayeleriyle ünlü olan bu mağara, serin suları ve doğal yapısıyla ziyaretçilerin ilgisini çeker.</p><h2><a href="guvercin_ada_kalesi.html">Güvercinada Kalesi</a></h2><p>Kuşadası\'nın simgelerinden biri olan kale, tarihi atmosferi ile görülmeye değerdir.</p>',
+
       /* ─────────── VIRTUAL TOUR PAGE ─────────── */
       'page.tour.title': 'Sanal Tur',
       'page.tour.hero_subtitle': 'Oteli 360° keşfedin',
@@ -715,6 +730,21 @@
       'page.tour.title': 'Virtual Tour',
       'page.tour.hero_subtitle': 'Explore the hotel in 360°',
       'page.tour.intro': 'Before visiting Medos Hotel, you can explore all our areas with our 360° virtual tour. Interactively walk through our rooms, pool area, restaurant and dock.',
+
+      /* ─────────── BLOG ─────────── */
+      'nav.blog': 'Blog',
+      'breadcrumb.blog': 'Blog',
+      'page.blog.title': 'Blog',
+      'page.blog.hero_subtitle': 'Travel Guide & News',
+      'blog.read_more': 'Read More →',
+      'blog.back': '← Back to Blog',
+      'blog.by': 'Medos Hotel',
+      'blog.kusadasi.title': 'Places to Visit in Kuşadası (2026 Updated Guide)',
+      'blog.kusadasi.date': 'April 17, 2026',
+      'blog.kusadasi.category': 'Travel Guide',
+      'blog.kusadasi.excerpt': 'Discover the most popular places to visit near Kuşadası: Dilek Peninsula National Park, Zeus Cave and Pigeon Island Castle.',
+      'blog.kusadasi.cta': 'Stay at Medos Beach Hotel and reach all these locations with ease.',
+      'blog.kusadasi.body': '<p>Kuşadası is one of the most popular holiday destinations in the Aegean Region. With its rich history and stunning natural scenery, it welcomes thousands of visitors every year.</p><h2><a href="dilek_yarim_adasi_milli_park.html">Dilek Peninsula National Park</a></h2><p>One of Turkey\'s most important natural areas, the national park is home to hundreds of plant species and rich wildlife. It is an ideal spot for nature hikes and enjoying the sea.</p><h2><a href="zeus_magarasi.html">Zeus Cave</a></h2><p>Famous for its mythological stories, this cave attracts visitors with its cool waters and unique natural structure.</p><h2><a href="guvercin_ada_kalesi.html">Pigeon Island Castle</a></h2><p>One of the symbols of Kuşadası, the castle is well worth a visit for its remarkable historical atmosphere.</p>',
     },
   };
 

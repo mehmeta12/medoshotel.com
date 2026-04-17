@@ -131,7 +131,7 @@
   rootDiv.innerHTML = [
     '<style>',
     '#medos-chatbot-root,#medos-chatbot-root *{box-sizing:border-box;font-family:"Kanit",Arial,sans-serif;}',
-    '#medos-chatbot-root{position:fixed;right:calc(1.5rem + env(safe-area-inset-right,0px));bottom:calc(1.75rem + env(safe-area-inset-bottom,0px) + 185px);z-index:9800;}',
+    '#medos-chatbot-root{position:fixed;right:calc(1.5rem + env(safe-area-inset-right,0px));bottom:calc(1.75rem + env(safe-area-inset-bottom,0px) + 58px);z-index:9800;}',
     '.mc-toggle{display:none;}',
     '.mc-box{width:360px;max-height:600px;display:none;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 20px 60px rgba(19,80,139,.18);border:1px solid #d9efeb;}',
     '.mc-box.open{display:flex;flex-direction:column;}',
@@ -159,7 +159,7 @@
     '.mc-send:hover,.mc-lead button:hover{background:var(--clr-primary-dk,#0097ac);}',
     '.mc-wa{display:block;text-align:center;text-decoration:none;background:#f0fdf8;color:#13508b;border:1px solid #b8e8d4;border-radius:12px;padding:11px;font-size:13px;font-weight:600;transition:background 150ms;flex-shrink:0;}',
     '.mc-wa:hover{background:#dcf5ec;}',
-    '@media(max-width:520px){#medos-chatbot-root{right:10px;bottom:calc(1.75rem + 220px);}.mc-box{width:calc(100vw - 20px);max-height:72vh;}}',
+    '@media(max-width:520px){#medos-chatbot-root{right:10px;bottom:calc(1.75rem + env(safe-area-inset-bottom,0px) + 58px);}.mc-box{width:calc(100vw - 20px);max-height:75vh;}}',
     '</style>',
     '<div id="mc-box" class="mc-box">',
     '  <div class="mc-header">',

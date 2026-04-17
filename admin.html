@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Chatbot Yönetimi — Medos Hotel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --p: #00b1c9; --s: #13508b; --r: 10px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Kanit', sans-serif; background: #f0f4f8; color: #1a2332; min-height: 100vh; }
+
+    /* ── Login ── */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--s), var(--p));
+    }
+    .login-card {
+      background: #fff; border-radius: 20px; padding: 2.5rem;
+      width: min(380px, 92vw); box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    }
+    .login-logo { text-align: center; margin-bottom: 1.75rem; }
+    .login-logo h1 { font-size: 1.4rem; font-weight: 700; color: var(--s); }
+    .login-logo p  { font-size: .875rem; color: #888; margin-top: .3rem; }
+    .login-card input {
+      width: 100%; border: 1.5px solid #dde3ea; border-radius: var(--r);
+      padding: .75rem 1rem; font-family: inherit; font-size: 1rem;
+      margin-bottom: .75rem; outline: none; transition: border-color .2s;
+    }
+    .login-card input:focus { border-color: var(--p); }
+    .btn-primary {
+      width: 100%; background: var(--s); color: #fff; border: none;
+      border-radius: var(--r); padding: .85rem; font-family: inherit;
+      font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--p); }
+    .login-error { color: #e53e3e; font-size: .85rem; margin-top: .5rem; display: none; text-align: center; }
+
+    /* ── App ── */
+    #app { display: none; }
+
+    .topbar {
+      background: var(--s); color: #fff; padding: .9rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    .topbar h1 { font-size: 1.05rem; font-weight: 600; }
+    .topbar-actions { display: flex; gap: .5rem; }
+    .btn-export {
+      background: var(--p); color: #fff; border: none; border-radius: 8px;
+      padding: .5rem 1.1rem; font-family: inherit; font-size: .85rem;
+      font-weight: 600; cursor: pointer; transition: filter .2s;
+    }
+    .btn-export:hover { filter: brightness(1.1); }
+    .btn-logout {
+      background: rgba(255,255,255,.12); color: #fff;
+      border: 1px solid rgba(255,255,255,.28); border-radius: 8px;
+      padding: .5rem 1rem; font-family: inherit; font-size: .85rem;
+      cursor: pointer; transition: background .2s;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,.22); }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── Tabs ── */
+    .tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; }
+    .tab {
+      padding: .55rem 1.4rem; border-radius: 8px; font-family: inherit;
+      font-size: .9rem; font-weight: 600; cursor: pointer; border: none;
+      background: #fff; color: #666; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      transition: all .2s;
+    }
+    .tab.active { background: var(--s); color: #fff; }
+
+    .stats-bar { display: flex; gap: .75rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .stat-pill {
+      background: #fff; border-radius: 8px; padding: .45rem 1rem;
+      font-size: .84rem; font-weight: 500; color: #555;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .stat-pill strong { color: var(--s); }
+
+    /* ── Add form ── */
+    .add-card {
+      background: #fff; border-radius: 14px; padding: 1.4rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07); margin-bottom: 1.5rem;
+      border-left: 4px solid var(--p);
+    }
+    .add-card h3 { font-size: .95rem; font-weight: 600; color: var(--s); margin-bottom: 1rem; }
+    .field-group { display: flex; flex-direction: column; gap: .3rem; margin-bottom: .75rem; }
+    .field-group label {
+      font-size: .75rem; font-weight: 600; color: #666;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .field-group input, .field-group textarea {
+      border: 1.5px solid #dde3ea; border-radius: 8px;
+      padding: .62rem .9rem; font-family: inherit; font-size: .9rem;
+      outline: none; transition: border-color .2s; resize: vertical;
+    }
+    .field-group input:focus, .field-group textarea:focus { border-color: var(--p); }
+    .field-group textarea { min-height: 88px; }
+    .btn-add {
+      background: var(--s); color: #fff; border: none; border-radius: 8px;
+      padding: .62rem 1.4rem; font-family: inherit; font-size: .9rem;
+      font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .btn-add:hover { background: var(--p); }
+
+    /* ── FAQ cards ── */
+    .faq-list { display: flex; flex-direction: column; gap: .65rem; }
+
+    .faq-card {
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.07); overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .faq-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+
+    .faq-card-header {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .85rem 1rem; cursor: pointer;
+      border-bottom: 1px solid transparent; transition: border-color .2s;
+    }
+    .faq-card.open .faq-card-header { border-bottom-color: #eef1f4; }
+
+    .faq-index {
+      width: 26px; height: 26px; border-radius: 50%; background: var(--p);
+      color: #fff; font-size: .72rem; font-weight: 700; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .faq-keywords { flex: 1; display: flex; flex-wrap: wrap; gap: .3rem; min-width: 0; }
+    .kw-chip {
+      background: rgba(0,177,201,.09); color: var(--p);
+      border: 1px solid rgba(0,177,201,.22); border-radius: 999px;
+      padding: .18rem .6rem; font-size: .76rem; font-weight: 500;
+    }
+    .faq-actions { display: flex; gap: .35rem; flex-shrink: 0; }
+    .btn-edit, .btn-del {
+      padding: .32rem .7rem; border-radius: 6px; font-family: inherit;
+      font-size: .76rem; font-weight: 600; cursor: pointer; border: none;
+      transition: filter .15s;
+    }
+    .btn-edit { background: rgba(19,80,139,.1); color: var(--s); }
+    .btn-del  { background: rgba(229,62,62,.08); color: #e53e3e; }
+    .btn-edit:hover { background: rgba(19,80,139,.18); }
+    .btn-del:hover  { background: rgba(229,62,62,.15); }
+
+    .faq-card-body { display: none; padding: .9rem 1rem; }
+    .faq-card.open .faq-card-body { display: block; }
+
+    .faq-answer-preview { font-size: .88rem; color: #444; line-height: 1.65; }
+
+    .faq-edit-form { display: none; }
+    .faq-card.editing .faq-edit-form { display: block; }
+    .faq-card.editing .faq-answer-preview { display: none; }
+    .edit-actions { display: flex; gap: .5rem; margin-top: .75rem; }
+    .btn-save {
+      background: var(--s); color: #fff; border: none; border-radius: 8px;
+      padding: .55rem 1.2rem; font-family: inherit; font-size: .875rem;
+      font-weight: 600; cursor: pointer; transition: background .2s;
+    }
+    .btn-save:hover { background: var(--p); }
+    .btn-cancel {
+      background: #f0f4f8; color: #555; border: none; border-radius: 8px;
+      padding: .55rem 1.2rem; font-family: inherit; font-size: .875rem; cursor: pointer;
+    }
+
+    /* ── Empty state ── */
+    .empty-state { text-align: center; padding: 3rem 1rem; color: #aaa; }
+    .empty-state p { margin-top: .75rem; font-size: .9rem; }
+
+    /* ── Export modal ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.5); z-index: 1000;
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 16px; padding: 1.75rem;
+      width: min(660px, 100%); max-height: 88vh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+    .modal h3 { font-size: 1.05rem; color: var(--s); margin-bottom: .5rem; }
+    .modal-desc { font-size: .85rem; color: #666; line-height: 1.6; margin-bottom: 1rem; }
+    .modal-desc code {
+      background: #f0f4f8; padding: 1px 5px; border-radius: 4px;
+      font-family: 'Courier New', monospace; font-size: .82rem;
+    }
+    .modal pre {
+      background: #f0f4f8; border-radius: 8px; padding: .9rem 1rem;
+      font-family: 'Courier New', monospace; font-size: .76rem;
+      line-height: 1.55; overflow-x: auto; white-space: pre-wrap;
+      border: 1px solid #dde3ea; max-height: 320px; overflow-y: auto;
+    }
+    .modal-actions { display: flex; gap: .5rem; margin-top: 1rem; flex-wrap: wrap; }
+    .btn-copy {
+      background: var(--p); color: #fff; border: none; border-radius: 8px;
+      padding: .62rem 1.2rem; font-family: inherit; font-size: .875rem;
+      font-weight: 600; cursor: pointer; transition: filter .2s;
+    }
+    .btn-copy:hover { filter: brightness(1.1); }
+    .btn-close {
+      background: #f0f4f8; color: #555; border: none; border-radius: 8px;
+      padding: .62rem 1.2rem; font-family: inherit; font-size: .875rem; cursor: pointer;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 2000;
+      background: var(--s); color: #fff; border-radius: 10px;
+      padding: .7rem 1.25rem; font-size: .875rem; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+      transform: translateY(80px); opacity: 0;
+      transition: transform .3s, opacity .3s; pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 520px) {
+      .topbar h1 { font-size: .9rem; }
+      .container { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Login ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>Medos Hotel</h1>
+      <p>Chatbot Yönetim Paneli</p>
+    </div>
+    <input type="password" id="pw-input" placeholder="Şifre" autocomplete="current-password">
+    <button class="btn-primary" onclick="doLogin()">Giriş Yap</button>
+    <p class="login-error" id="login-error">Hatalı şifre. Tekrar deneyin.</p>
+  </div>
+</div>
+
+<!-- ── App ── -->
+<div id="app">
+  <div class="topbar">
+    <h1>💬 Chatbot Yönetimi</h1>
+    <div class="topbar-actions">
+      <button class="btn-export" onclick="openExport()">📋 Dışa Aktar</button>
+      <button class="btn-logout" onclick="doLogout()">Çıkış</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('tr', this)">🇹🇷 Türkçe</button>
+      <button class="tab"        onclick="switchTab('en', this)">🇬🇧 English</button>
+    </div>
+
+    <div class="stats-bar" id="stats-bar"></div>
+
+    <!-- Add form -->
+    <div class="add-card">
+      <h3>+ Yeni Soru-Cevap Ekle</h3>
+      <div class="field-group">
+        <label>Anahtar Kelimeler (virgülle ayırın)</label>
+        <input type="text" id="new-keywords"
+          placeholder="örn: havuz, yüzme, açık havuz">
+      </div>
+      <div class="field-group">
+        <label>Cevap</label>
+        <textarea id="new-answer"
+          placeholder="Ziyaretçinin göreceği yanıt metni..."></textarea>
+      </div>
+      <button class="btn-add" onclick="addEntry()">Ekle</button>
+    </div>
+
+    <!-- List -->
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</div>
+
+<!-- ── Export modal ── -->
+<div class="modal-overlay" id="export-modal">
+  <div class="modal">
+    <h3>📋 Dışa Aktar</h3>
+    <p class="modal-desc">
+      Aşağıdaki kodu kopyalayın. <code>chatbot.js</code> dosyasında
+      <code>var LOCAL_FAQ = {</code> ile başlayan bloğu (kapanış <code>};</code> dahil)
+      bu kodla değiştirin, sonra dosyayı kaydedin ve sunucuya yükleyin.
+    </p>
+    <pre id="export-code"></pre>
+    <div class="modal-actions">
+      <button class="btn-copy"  onclick="copyCode()">Kopyala</button>
+      <button class="btn-close" onclick="closeExport()">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ─── Config ──────────────────────────────────────────────────────── */
+/* Şifreyi değiştirmek için bu satırı düzenleyin: */
+var PASSWORD = 'medos2025';
+
+var STORAGE_KEY = 'medos_faq_admin';
+
+/* ─── Default FAQ (chatbot.js ile senkron tutun) ──────────────────── */
+var DEFAULT_FAQ = {
+  tr: [
+    { keywords: ['fiyat', 'ucret', 'gecelik', 'price'],
+      answer: 'Fiyatlarımız tarih, kişi sayısı ve oda tipine göre değişmektedir. Lütfen giriş-çıkış tarihinizi ve kişi sayısını paylaşın ya da WhatsApp üzerinden bizimle iletişime geçin: +90 541 646 17 86.' },
+    { keywords: ['musaitlik', 'bos oda', 'availability'],
+      answer: 'Müsaitlik için lütfen giriş tarihi, çıkış tarihi ve kişi sayısını paylaşın. Ekibimiz size en kısa sürede yardımcı olacaktır.' },
+    { keywords: ['deniz', 'plaj', 'iskele', 'uzaklik'],
+      answer: 'Otelimiz denize sıfır konumdadır. Özel iskele 50 metre, plaj ise 250 metre mesafededir.' },
+    { keywords: ['giris', 'cikis', 'check', 'late', 'erken'],
+      answer: 'Giriş saati 14:00, çıkış saati 12:00\'dir. Erken giriş ve geç çıkış talepleri müsaitliğe bağlıdır ve ek ücrete tabi olabilir.' },
+    { keywords: ['wifi', 'wi-fi', 'internet'],
+      answer: 'Evet, Wi-Fi internet hizmeti sunulmaktadır.' },
+    { keywords: ['oda temizligi', 'temizlik', 'housekeeping', 'havlu'],
+      answer: 'Odalar 2 günde bir ücretsiz temizlenir. Çarşaf ve havlular da 2 günde bir ücretsiz değiştirilir. 2 günden önce istenen ek temizlik ve değişim ücretli olabilir.' },
+    { keywords: ['pansiyon', 'konsept', 'soft all inclusive', 'bed breakfast'],
+      answer: 'Otelimiz Bed & Breakfast ve Soft All Inclusive konseptlerinde hizmet vermektedir.' },
+    { keywords: ['dugun', 'nisan', 'aktivite', 'organizasyon', 'tekne', 'yat'],
+      answer: 'Düğün, nişan ve özel organizasyon talepleriniz için bizimle iletişime geçebilirsiniz. Ayrıca tekne turu, özel yat kiralama ve çeşitli aktiviteler hakkında da bilgi verebiliriz.' },
+    { keywords: ['whatsapp', 'iletisim', 'rezervasyon'],
+      answer: 'Bizimle WhatsApp üzerinden hızlıca iletişime geçebilirsiniz: +90 541 646 17 86' }
+  ],
+  en: [
+    { keywords: ['price', 'rate', 'cost'],
+      answer: 'Our prices vary depending on dates, number of guests, and room type. Please share your check-in/check-out dates and number of guests, or contact us on WhatsApp: +90 541 646 17 86.' },
+    { keywords: ['availability', 'available', 'room'],
+      answer: 'For availability, please share your check-in date, check-out date, and number of guests. Our team will assist you shortly.' },
+    { keywords: ['beach', 'distance', 'pier'],
+      answer: 'Our hotel is right by the sea. The private pier is 50 metres away and the beach is 250 metres away.' },
+    { keywords: ['check-in', 'check out', 'checkout', 'early', 'late'],
+      answer: 'Check-in starts at 14:00 and check-out is at 12:00. Early check-in and late check-out requests depend on availability and may be subject to an extra charge.' },
+    { keywords: ['wifi', 'wi-fi', 'internet'],
+      answer: 'Yes, Wi-Fi internet service is available.' },
+    { keywords: ['cleaning', 'housekeeping', 'towels', 'linen'],
+      answer: 'Rooms are cleaned free of charge every 2 days. Bed linen and towels are also changed every 2 days free of charge. Additional cleaning requested earlier may be charged.' },
+    { keywords: ['board', 'concept', 'soft all inclusive', 'bed breakfast'],
+      answer: 'Our hotel operates with Bed & Breakfast and Soft All Inclusive concepts.' },
+    { keywords: ['wedding', 'engagement', 'activity', 'boat', 'yacht', 'event'],
+      answer: 'You can contact us for wedding, engagement, and special event requests. We can also provide information about boat tours, private yacht rental, and various activities.' },
+    { keywords: ['whatsapp', 'contact', 'reservation'],
+      answer: 'You can quickly contact us on WhatsApp: +90 541 646 17 86' }
+  ]
+};
+
+/* ─── State ───────────────────────────────────────────────────────── */
+var faq  = JSON.parse(localStorage.getItem(STORAGE_KEY)) || JSON.parse(JSON.stringify(DEFAULT_FAQ));
+var lang = 'tr';
+
+/* ─── Auth ────────────────────────────────────────────────────────── */
+function doLogin() {
+  if (document.getElementById('pw-input').value === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    renderList();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pw-input').value = '';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+/* ─── Tab ─────────────────────────────────────────────────────────── */
+function switchTab(l, btn) {
+  lang = l;
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  btn.classList.add('active');
+  renderList();
+}
+
+/* ─── Render ──────────────────────────────────────────────────────── */
+function renderList() {
+  var items = faq[lang];
+
+  document.getElementById('stats-bar').innerHTML =
+    '<div class="stat-pill"><strong>' + faq.tr.length + '</strong> TR kayıt</div>' +
+    '<div class="stat-pill"><strong>' + faq.en.length + '</strong> EN kayıt</div>';
+
+  var list = document.getElementById('faq-list');
+
+  if (!items.length) {
+    list.innerHTML = '<div class="empty-state">' +
+      '<svg width="48" height="48" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24">' +
+      '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '<p>Henüz soru-cevap yok.<br>Yukarıdan ekleyebilirsiniz.</p></div>';
+    return;
+  }
+
+  list.innerHTML = items.map(function(item, i) {
+    var chips = item.keywords.map(function(k) {
+      return '<span class="kw-chip">' + esc(k) + '</span>';
+    }).join('');
+    return '<div class="faq-card" id="card-' + i + '">' +
+      '<div class="faq-card-header" onclick="toggleCard(' + i + ')">' +
+        '<div class="faq-index">' + (i+1) + '</div>' +
+        '<div class="faq-keywords">' + chips + '</div>' +
+        '<div class="faq-actions">' +
+          '<button class="btn-edit" onclick="startEdit(event,' + i + ')">Düzenle</button>' +
+          '<button class="btn-del"  onclick="delEntry(event,' + i + ')">Sil</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="faq-card-body">' +
+        '<div class="faq-answer-preview">' + esc(item.answer) + '</div>' +
+        '<div class="faq-edit-form">' +
+          '<div class="field-group" style="margin-top:.5rem">' +
+            '<label>Anahtar Kelimeler</label>' +
+            '<input type="text" id="ekw-' + i + '" value="' + escAttr(item.keywords.join(', ')) + '">' +
+          '</div>' +
+          '<div class="field-group">' +
+            '<label>Cevap</label>' +
+            '<textarea id="eans-' + i + '">' + esc(item.answer) + '</textarea>' +
+          '</div>' +
+          '<div class="edit-actions">' +
+            '<button class="btn-save"   onclick="saveEdit(' + i + ')">Kaydet</button>' +
+            '<button class="btn-cancel" onclick="cancelEdit(' + i + ')">İptal</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+function escAttr(s) { return String(s).replace(/"/g,'&quot;'); }
+
+/* ─── Card toggle ─────────────────────────────────────────────────── */
+function toggleCard(i) {
+  document.getElementById('card-' + i).classList.toggle('open');
+}
+
+/* ─── Edit ────────────────────────────────────────────────────────── */
+function startEdit(e, i) {
+  e.stopPropagation();
+  var card = document.getElementById('card-' + i);
+  card.classList.add('open', 'editing');
+}
+
+function saveEdit(i) {
+  var kw  = document.getElementById('ekw-'  + i).value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+  var ans = document.getElementById('eans-' + i).value.trim();
+  if (!kw.length || !ans) { showToast('Lütfen tüm alanları doldurun.'); return; }
+  faq[lang][i] = { keywords: kw, answer: ans };
+  persist(); renderList();
+  showToast('Kayıt güncellendi.');
+}
+
+function cancelEdit(i) {
+  document.getElementById('card-' + i).classList.remove('editing');
+}
+
+/* ─── Add ─────────────────────────────────────────────────────────── */
+function addEntry() {
+  var kw  = document.getElementById('new-keywords').value.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+  var ans = document.getElementById('new-answer').value.trim();
+  if (!kw.length || !ans) { showToast('Lütfen anahtar kelime ve cevap girin.'); return; }
+  faq[lang].push({ keywords: kw, answer: ans });
+  document.getElementById('new-keywords').value = '';
+  document.getElementById('new-answer').value   = '';
+  persist(); renderList();
+  showToast('Yeni kayıt eklendi.');
+}
+
+/* ─── Delete ──────────────────────────────────────────────────────── */
+function delEntry(e, i) {
+  e.stopPropagation();
+  if (!confirm('"' + faq[lang][i].keywords.join(', ') + '" kaydı silinsin mi?')) return;
+  faq[lang].splice(i, 1);
+  persist(); renderList();
+  showToast('Kayıt silindi.');
+}
+
+/* ─── Persist ─────────────────────────────────────────────────────── */
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(faq));
+}
+
+/* ─── Export ──────────────────────────────────────────────────────── */
+function openExport() {
+  document.getElementById('export-code').textContent = buildCode();
+  document.getElementById('export-modal').classList.add('open');
+}
+function closeExport() {
+  document.getElementById('export-modal').classList.remove('open');
+}
+
+function buildCode() {
+  function fmtEntry(item) {
+    return '      { keywords: ' + JSON.stringify(item.keywords) + ',\n' +
+           '        answer: '   + JSON.stringify(item.answer)   + ' }';
+  }
+  return 'var LOCAL_FAQ = {\n' +
+    '    tr: [\n' + faq.tr.map(fmtEntry).join(',\n') + '\n    ],\n' +
+    '    en: [\n' + faq.en.map(fmtEntry).join(',\n') + '\n    ]\n  };';
+}
+
+function copyCode() {
+  var code = document.getElementById('export-code').textContent;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).then(function() {
+      showToast('Kod panoya kopyalandı!'); closeExport();
+    }).catch(function() { showToast('Kopyalama başarısız — manuel seçin.'); });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = code; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('Kod panoya kopyalandı!'); closeExport();
+  }
+}
+
+/* ─── Toast ───────────────────────────────────────────────────────── */
+function showToast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 2500);
+}
+
+/* Close modal on overlay click */
+document.getElementById('export-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeExport();
+});
+</script>
+</body>
+</html>

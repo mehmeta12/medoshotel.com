@@ -51,13 +51,15 @@
 /                                        → index.html (Home)
 /standart_oda.html                       → Standard Room detail
 /aile_oda.html                           → Family Room detail
-/junior_suit.html                        → Family Suite detail  (URL ≠ name; "Aile Süiti")
+/aile_suit.html                        → Family Suite detail  (URL ≠ name; "Aile Süiti")
 /hakkimizda.html                         → About
 /iletisim.html                           → Contact
 /ulasim.html                             → Getting Here (transport methods + map)
 /booking.html                            → Reservation page
 /sanal_gezinti.html                      → Virtual Tour (iframe → sanal_tur/index.htm)
 /sanal_tur/                              → TDVPlayer tabanlı 360° tur paketi (26 panorama); fonts.css Kanit override içerir; locale/tr.txt etiketler TR; Deluxe Oda gizlendi, Junior Süit → Aile Süiti
+/blog.html                               → Blog listing page
+/kusadasi-gezilecek-yerler.html          → Blog post 1: Kuşadası'nda Gezilecek Yerler (2026)
 /efes_antik_kenti.html                   → Attraction: Ephesus
 /meryem_ana_evi.html                     → Attraction: House of Virgin Mary
 /sirince_koyu.html                       → Attraction: Şirince Village
@@ -81,7 +83,7 @@
 |---|---|---|---|
 | Standart Oda | Standard Room | `standart_oda.html` | 21 m², **2–3 kişi**, deniz/kısmı deniz/Milli Park/bahçe manzarası; TRP hariç 2×tek veya 1×çift yatak; TRP: 1çift+1tek veya 3×tek; klima, makyaj masası, dolaplar, Fransız balkon, banyo+tuvalet, saç kurutma makinesi, uydu TV, minibar, buklet malzemeleri, terlik, laminant zemin |
 | Aile Odası | Family Room | `aile_oda.html` | 45 m², **3–5 kişi**, **Bahçe ve Dağ Manzarası**, bağlantılı 2 yatak odası; ana oda: tek/çift yatak, 2. oda: 2–3 tek kişilik yatak; klima, makyaj masası, dolaplar, Fransız balkon, banyo+tuvalet, saç kurutma makinesi, uydu TV, minibar, buklet malzemeleri, terlik, laminant zemin; sidebar görseli: room-2.jpg |
-| Aile Süiti | Family Suite | `junior_suit.html` | **75 m²**, **4–6 kişi** (+ek yatakla 7), **Bahçe ve Deniz Manzaralı**, bağlantılı 2 yatak odası + salon; ana oda: tek/çift yatak, 2. oda: 3 tek kişilik yatak; klima, makyaj masası, dolaplar, Fransız balkon, banyo+tuvalet, saç kurutma makinesi, uydu TV, minibar, buklet malzemeleri, terlik |
+| Aile Süiti | Family Suite | `aile_suit.html` | **75 m²**, **4–6 kişi** (+ek yatakla 7), **Bahçe ve Deniz Manzaralı**, bağlantılı 2 yatak odası + salon; ana oda: tek/çift yatak, 2. oda: 3 tek kişilik yatak; klima, makyaj masası, dolaplar, Fransız balkon, banyo+tuvalet, saç kurutma makinesi, uydu TV, minibar, buklet malzemeleri, terlik |
 
 **Kaldırılan özellikler:** Kasa (tüm oda tiplerinde yok edildi)
 
@@ -144,7 +146,8 @@
 5. Hakkımızda
 6. Ulaşım
 7. İletişim
-8. Dil seçici (TR / EN)
+8. Blog
+9. Dil seçici (TR / EN)
 
 **Mobil:** hamburger menü (`.hamburger` → `.top-bun`, `.patty`, `.bottom-bun`)
 

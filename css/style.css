@@ -1090,9 +1090,9 @@ address { font-style: normal; }
   right: calc(1.5rem + env(safe-area-inset-right, 0px));
   z-index: 900;
   display: flex;
-  flex-direction: column;
-  gap: .6rem;
-  align-items: flex-end;
+  flex-direction: row;
+  gap: .5rem;
+  align-items: center;
 }
 
 .alt-btn {
@@ -1105,12 +1105,17 @@ address { font-style: normal; }
   font-size: .875rem;
   letter-spacing: .03em;
   color: var(--clr-white);
-  padding: .75rem 1.4rem;
-  min-width: 190px;
+  padding: 0 1.25rem;
+  height: 48px;
   border-radius: var(--radius-full);
   box-shadow: 0 4px 16px rgba(0,0,0,.22);
   transition: transform var(--tr-fast), box-shadow var(--tr-fast), filter var(--tr-fast);
   white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .alt-btn { width: 48px; padding: 0; }
+  .alt-btn span { display: none; }
 }
 
 .alt-btn:hover {
