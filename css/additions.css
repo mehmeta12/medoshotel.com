@@ -2,6 +2,76 @@
    ADDITIONS: Dropdown nav · Page hero · Sub-page styles
    ══════════════════════════════════════════════════════════════════════ */
 
+/* ──────────────────── Global inline link stili ─────────────────────── */
+/* Paragraph içindeki classsız linkler — nav, buton, kart linklerini etkilemez */
+p a:not([class]) {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+p a:not([class]):hover {
+  color: var(--clr-secondary);
+  text-decoration-color: var(--clr-secondary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+/* Görsel sütunu: 3 görsel dikey şerit, metin yüksekliğini takip eder */
+.about-images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  height: unset;
+  min-height: 360px;
+}
+.about-img {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.about-img:hover {
+  transform: scale(1.015);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 1150px) {
+  .about-grid {
+    grid-template-columns: 3fr 2fr;
+    align-items: stretch;
+  }
+  /* Görsel sütunu tam metin yüksekliğini doldurur */
+  .about-images { min-height: unset; }
+}
+
+/* ──────────────────── İlgili Sayfalar ──────────────────────────────── */
+.related-pages {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--clr-border, #e5e7eb);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  font-size: .875rem;
+  color: var(--clr-muted);
+}
+.related-pages a {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.related-pages a:hover { color: var(--clr-secondary); }
+
 /* ──────────────────── Nav Dropdown ─────────────────────────────────── */
 .nav-drop-toggle {
   background: none;
@@ -60,7 +130,7 @@
 /* ──────────────────── Page Hero (sub-pages) ─────────────────────────── */
 .page-hero {
   position: relative;
-  height: clamp(260px, 40vh, 420px);
+  height: clamp(200px, 28vh, 320px);
   display: flex;
   align-items: flex-end;
   padding-bottom: var(--space-lg);
@@ -193,6 +263,56 @@
 /* Room gallery slider (reuses .slider-* classes from main style) */
 .room-gallery-section h2 {
   margin-bottom: var(--space-md);
+}
+
+/* Slider image height — capped so main image + thumbnail strip fit in one viewport */
+.slider-item img {
+  aspect-ratio: unset;
+  height: clamp(260px, 54vh, 560px);
+}
+
+/* ──────────────────── Thumbnail strip ──────────────────────────────── */
+.slider-thumbs {
+  display: flex;
+  gap: .4rem;
+  padding: .6rem var(--space-lg);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-primary) transparent;
+  background: var(--clr-light, #f5f5f5);
+}
+
+.slider-thumbs::-webkit-scrollbar { height: 4px; }
+.slider-thumbs::-webkit-scrollbar-track { background: transparent; }
+.slider-thumbs::-webkit-scrollbar-thumb { background: var(--clr-primary); border-radius: 2px; }
+
+.slider-thumb {
+  flex: 0 0 auto;
+  width: 88px;
+  height: 59px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  opacity: .55;
+  transition: opacity .2s ease, border-color .2s ease;
+}
+
+.slider-thumb:hover { opacity: .85; }
+
+.slider-thumb.active {
+  border-color: var(--clr-primary);
+  opacity: 1;
+}
+
+.slider-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
 }
 
 /* ──────────────────── Attraction Detail ────────────────────────────── */
@@ -1237,15 +1357,30 @@
 }
 
 /* ──────────────────── SEO Landing Sayfaları ─────────────────────────── */
-.seo-sidebar-img {
-  width: 100%;
-  border-radius: 12px;
-  object-fit: cover;
-  display: block;
+.attraction-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: start;
 }
 
-.seo-sidebar-img + .seo-sidebar-img {
-  margin-top: 12px;
+@media (min-width: 1150px) {
+  .attraction-info-grid {
+    grid-template-columns: 1fr 2fr;
+  }
+  .attraction-info-sidebar {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+.seo-sidebar-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  display: block;
+  box-shadow: var(--shadow-md);
 }
 
 .page-cta-row {
@@ -1395,6 +1530,98 @@
   margin-bottom: var(--space-sm);
   padding-bottom: 0.4rem;
   border-bottom: 2px solid rgba(0,177,201,.25);
+}
+
+.blog-body h2 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--tr-fast);
+}
+
+.blog-body h2 a:hover { color: var(--clr-primary); }
+
+.blog-body ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-body ul li {
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--clr-text);
+  line-height: 1.7;
+}
+
+.blog-body ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--clr-primary);
+  font-weight: var(--fw-bold);
+}
+
+.blog-body img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin: var(--space-md) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.blog-body a {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--tr-fast);
+}
+
+.blog-body a:hover { color: var(--clr-secondary); }
+
+.blog-related {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 2px solid rgba(0,177,201,.2);
+}
+
+.blog-related-title {
+  font-size: 1rem;
+  font-weight: var(--fw-semibold);
+  color: var(--clr-secondary);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.blog-related-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.blog-related-list a {
+  display: inline-block;
+  background: var(--clr-light);
+  color: var(--clr-secondary);
+  border: 1px solid #dde3ea;
+  border-radius: var(--radius-full);
+  padding: 0.35rem 1rem;
+  font-size: .88rem;
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  transition: background var(--tr-fast), border-color var(--tr-fast), color var(--tr-fast);
+}
+
+.blog-related-list a:hover {
+  background: rgba(0,177,201,.1);
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
 }
 
 .blog-cta-box {

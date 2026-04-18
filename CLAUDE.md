@@ -60,6 +60,8 @@
 /sanal_tur/                              → TDVPlayer tabanlı 360° tur paketi (26 panorama); fonts.css Kanit override içerir; locale/tr.txt etiketler TR; Deluxe Oda gizlendi, Junior Süit → Aile Süiti
 /blog.html                               → Blog listing page
 /kusadasi-gezilecek-yerler.html          → Blog post 1: Kuşadası'nda Gezilecek Yerler (2026)
+/dilek-yarimadasi-milli-park-rehberi.html → Blog post 2: Dilek Yarımadası Milli Parkı Rehberi
+/kusadasi-tekne-turlari-rehberi.html     → Blog post 3: Kuşadası Tekne Turları Rehberi
 /efes_antik_kenti.html                   → Attraction: Ephesus
 /meryem_ana_evi.html                     → Attraction: House of Virgin Mary
 /sirince_koyu.html                       → Attraction: Şirince Village

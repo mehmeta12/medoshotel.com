@@ -300,8 +300,8 @@
 
 <script>
 /* ─── Config ──────────────────────────────────────────────────────── */
-/* Şifreyi değiştirmek için bu satırı düzenleyin: */
-var PASSWORD = 'medos2025';
+/* Şifreyi değiştirmek için: yeni şifrenin SHA-256 hash'ini alın ve aşağıya yapıştırın */
+var PASSWORD_HASH = '483c9c000fca08d167cdbd12738dab636924b28fef47e1bc9ac734fed559ec89';
 
 var STORAGE_KEY = 'medos_faq_admin';
 
@@ -354,12 +354,33 @@ var faq  = JSON.parse(localStorage.getItem(STORAGE_KEY)) || JSON.parse(JSON.stri
 var lang = 'tr';
 
 /* ─── Auth ────────────────────────────────────────────────────────── */
-function doLogin() {
-  if (document.getElementById('pw-input').value === PASSWORD) {
+var _failCount = 0;
+var _lockUntil = 0;
+
+async function sha256(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+}
+
+async function doLogin() {
+  var now = Date.now();
+  if (now < _lockUntil) {
+    var secs = Math.ceil((_lockUntil - now) / 1000);
+    document.getElementById('login-error').textContent = secs + ' saniye bekleyin.';
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  var input = document.getElementById('pw-input').value;
+  var hash  = await sha256(input);
+  if (hash === PASSWORD_HASH) {
+    _failCount = 0;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     renderList();
   } else {
+    _failCount++;
+    if (_failCount >= 5) { _lockUntil = Date.now() + 30000; _failCount = 0; }
+    document.getElementById('login-error').textContent = 'Hatalı şifre. Tekrar deneyin.';
     document.getElementById('login-error').style.display = 'block';
   }
 }

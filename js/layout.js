@@ -241,6 +241,12 @@
   /* ──────────────────── Inject into DOM ──────────────────────────────── */
 
   function inject() {
+    /* Referrer-Policy security header */
+    var rpMeta = document.createElement('meta');
+    rpMeta.name = 'referrer';
+    rpMeta.content = 'strict-origin-when-cross-origin';
+    document.head.appendChild(rpMeta);
+
     /* Header: prepend to <body> */
     document.body.insertAdjacentHTML('afterbegin', buildHeader());
 
@@ -305,9 +311,12 @@
     var navLinks  = document.getElementById('nav-links');
 
     /* ── Scroll: glassmorphism toggle ── */
+    var isHomepage = /^(\/|\/index\.html|index\.html)$/.test(
+      window.location.pathname.split('/').pop() || '/'
+    );
     function onScroll() {
       if (!header) return;
-      header.classList.toggle('scrolled', window.scrollY > 60);
+      header.classList.toggle('scrolled', !isHomepage || window.scrollY > 60);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
