@@ -308,6 +308,8 @@ window._T_en = {
   'blog.related.denize_sifir': 'Kuşadası Beachfront Hotel',
   'blog.related.dilek': 'Dilek Peninsula Guide',
   'blog.related.tekne': 'Kuşadası Boat Tours Guide',
+  'blog.related.kusadasi': 'Places to Visit in Kuşadası',
+  'blog.related.efes': 'Ephesus Ancient City Guide',
   'blog.kusadasi.title': 'Places to Visit in Kuşadası (2026 Updated Guide)',
   'blog.kusadasi.date': 'April 17, 2026',
   'blog.plaj.title': 'Güzelçamlı Beaches Guide',

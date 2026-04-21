@@ -305,6 +305,8 @@ window._T_tr = {
   'blog.related.denize_sifir': 'Kuşadası Denize Sıfır Otel',
   'blog.related.dilek': 'Dilek Yarımadası Rehberi',
   'blog.related.tekne': 'Kuşadası Tekne Turları Rehberi',
+  'blog.related.kusadasi': 'Kuşadası\'nda Gezilecek Yerler',
+  'blog.related.efes': 'Efes Antik Kenti Rehberi',
   'blog.kusadasi.title': 'Kuşadası\'nda Gezilecek Yerler (2026 Güncel Rehber)',
   'blog.kusadasi.date': '17 Nisan 2026',
   'blog.kusadasi.category': 'Seyahat Rehberi',
