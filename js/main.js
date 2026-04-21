@@ -164,3 +164,46 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
   elements.forEach(el => observer.observe(el));
 })();
+
+/* ──────────────────── 3. Hero title rotator ─────────────────────────── */
+(function initHeroRotator() {
+  const slides = document.querySelectorAll('.hero-title--slide');
+  if (slides.length < 2) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+})();
+
+/* ──────────────────── 4. Hero video lazy loader ────────────────────── */
+(function initHeroVideo() {
+  var bg = document.getElementById('heroVideoBg');
+  if (!bg) return;
+
+  function loadVideo() {
+    var v = document.createElement('video');
+    v.className = 'hero-video';
+    v.autoplay = true;
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('aria-hidden', 'true');
+    v.poster = 'img/medos-beach-hotel-guzelcamli.webp';
+    var s = document.createElement('source');
+    s.src = 'video/hero_new.mp4';
+    s.type = 'video/mp4';
+    v.appendChild(s);
+    v.addEventListener('canplay', function () {
+      bg.parentNode.replaceChild(v, bg);
+    }, { once: true });
+    v.load();
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(loadVideo, 800);
+  } else {
+    window.addEventListener('load', function () { setTimeout(loadVideo, 800); });
+  }
+})();

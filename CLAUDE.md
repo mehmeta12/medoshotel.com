@@ -1,7 +1,7 @@
 # Medos Hotel Website — Project Context
 
 > **Canlı tutulur:** Her kod değişikliğinden sonra bu dosya güncellenir.  
-> Son güncelleme: 2026-04-17
+> Son güncelleme: 2026-04-19
 
 ---
 
@@ -19,8 +19,8 @@
 | Layer | Technology |
 |---|---|
 | Markup | Static HTML5 |
-| Styling | Custom CSS — `css/style.css` + `css/additions.css` |
-| JS | Vanilla JS — `js/i18n.js`, `js/layout.js`, `js/main.js`, `js/chatbot.js` |
+| Styling | Custom CSS — `css/style.css` (additions.css merged in; single stylesheet) |
+| JS | Vanilla JS — `js/i18n.js` (core) + `js/i18n.tr.js` / `js/i18n.en.js` (lang files), `js/layout.js`, `js/main.js`, `js/chatbot.js` |
 | Analytics | Google Tag Manager (`GTM-WHNJZ96W`) |
 | Fonts | Google Fonts — **Kanit** (300/400/500/600/700) |
 | Hosting | Static file serving |

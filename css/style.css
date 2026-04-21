@@ -364,6 +364,48 @@ address { font-style: normal; }
   color: var(--clr-primary);
 }
 
+/* Nav dropdowns */
+.nav-item.has-dropdown { position: relative; }
+
+.nav-item.active > .nav-drop-toggle .drop-chevron {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--clr-white);
+  border: 1px solid #dde3ea;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  min-width: 220px;
+  overflow: hidden;
+  z-index: 200;
+  animation: fadeInDown .18s ease;
+}
+
+.nav-dropdown.open { display: block; }
+
+.nav-dropdown a {
+  display: block;
+  padding: 0.6rem 1.1rem;
+  font-size: .9rem;
+  color: var(--clr-text);
+  transition: background var(--tr-fast), color var(--tr-fast);
+  white-space: nowrap;
+}
+
+.nav-dropdown a:hover,
+.nav-dropdown a.active {
+  background: var(--clr-light);
+  color: var(--clr-primary);
+}
+
+.nav-dropdown a + a { border-top: 1px solid #f0f3f5; }
+
 /* Hamburger */
 .hamburger {
   display: none;
@@ -420,8 +462,11 @@ address { font-style: normal; }
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  /* Performance hint: browser can start decoding */
   will-change: transform;
+}
+#heroVideoBg {
+  background-size: cover;
+  background-position: center;
 }
 
 .hero-overlay {
@@ -439,13 +484,32 @@ address { font-style: normal; }
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
   max-width: 760px;
+  margin-inline: auto;
   padding-inline: var(--container-pad);
+  text-align: center;
+  transform: translateX(-5vw);
   animation: heroFadeUp 1s ease 0.3s both;
 }
 
+.hero-badge {
+  display: inline-block;
+  background: rgba(0,177,201,.18);
+  border: 1px solid rgba(0,177,201,.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: clamp(.75rem, 1.8vw, .88rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: .06em;
+  padding: .35em .9em;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-sm);
+}
+
 .hero-eyebrow {
-  font-size: clamp(.8rem, 2vw, .95rem);
+  font-size: clamp(.9rem, 2.2vw, 1.1rem);
   font-weight: var(--fw-medium);
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -453,12 +517,34 @@ address { font-style: normal; }
   margin-bottom: var(--space-sm);
 }
 
-.hero-title {
-  font-size: clamp(2.2rem, 7vw, 4.5rem);
-  font-weight: var(--fw-bold);
-  line-height: 1.1;
+.hero-title-rotator {
+  display: grid;
+  justify-items: center;
   margin-bottom: var(--space-sm);
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.2;
+  text-align: center;
   text-shadow: 0 2px 20px rgba(0,0,0,.4);
+  margin-bottom: 0;
+}
+
+.hero-title--slide {
+  grid-area: 1 / 1;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+  pointer-events: none;
+}
+
+.hero-title--slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .hero-ctas {
@@ -466,6 +552,7 @@ address { font-style: normal; }
   gap: var(--space-sm);
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: var(--space-md);
 }
 
 /* Scroll indicator */
@@ -1275,6 +1362,32 @@ address { font-style: normal; }
     background: rgba(0,0,0,.45);
     z-index: -1;
   }
+
+  /* Mobile dropdowns as accordion */
+  .nav-item.has-dropdown { position: static; }
+
+  .nav-dropdown {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: rgba(255,255,255,.07);
+    border-inline-start: 2px solid rgba(255,255,255,.2);
+    margin-inline-start: 1rem;
+    min-width: unset;
+    animation: none;
+  }
+
+  .nav-dropdown a {
+    color: rgba(255,255,255,.82);
+    padding: 0.5rem 1rem;
+    font-size: .9rem;
+  }
+
+  .nav-dropdown a:hover { background: rgba(255,255,255,.1); color: var(--clr-white); }
+  .nav-dropdown a + a { border-top-color: rgba(255,255,255,.08); }
+  .nav-drop-toggle { width: 100%; justify-content: space-between; }
 }
 
 /* ──────────────────── 19. REDUCED MOTION ───────────────────────────── */
@@ -1293,7 +1406,14 @@ address { font-style: normal; }
   }
 }
 
-/* ──────────────────── 20. PRINT ─────────────────────────────────────── */
+/* ──────────────────── 20. Elfsight widget başlık gizle ─────────────── */
+.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 .eapps-google-reviews-title,
+.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 [class*="title"],
+.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 [class*="header"] {
+  display: none !important;
+}
+
+/* ──────────────────── 21. PRINT ─────────────────────────────────────── */
 @media print {
   .site-header, .hero-video, .alt_butonlar, .slider-btn, .hero-ctas { display: none; }
   .hero { height: auto; min-height: 0; }

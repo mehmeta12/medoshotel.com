@@ -188,22 +188,7 @@
   </div>
 
 </footer>
-
-<!-- Fixed bottom CTAs -->
-<div class="alt_butonlar" role="complementary" aria-label="Hızlı işlemler">
-  <a href="booking.html" class="alt-btn alt-btn--booking" aria-label="Çevrimiçi rezervasyon yap">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    <span data-i18n="cta.book">${t('cta.book')}</span>
-  </a>
-  <a href="tel:+902566450740" class="alt-btn alt-btn--call" aria-label="Otel ile telefonda iletişime geç">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 7 7l.78-.78a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.5z"/></svg>
-    <span>0256 645 07 40</span>
-  </a>
-  <button type="button" class="alt-btn alt-btn--chat" aria-label="Asistan ile sohbet et" onclick="if(window.MedosChat)window.MedosChat.toggle()">
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    <span data-i18n="cta.chat">${t('cta.chat')}</span>
-  </button>
-</div>`;
+`;
   }
 
   /* ──────────────────── Cookie Banner HTML ───────────────────────────── */
@@ -241,11 +226,33 @@
   /* ──────────────────── Inject into DOM ──────────────────────────────── */
 
   function inject() {
-    /* Referrer-Policy security header */
+    /* Google Fonts — Kanit (skip if already in <head>) */
+    if (!document.querySelector('link[href*="Kanit"]')) {
+      var pc1 = document.createElement('link');
+      pc1.rel = 'preconnect'; pc1.href = 'https://fonts.googleapis.com';
+      document.head.appendChild(pc1);
+      var pc2 = document.createElement('link');
+      pc2.rel = 'preconnect'; pc2.href = 'https://fonts.gstatic.com'; pc2.crossOrigin = '';
+      document.head.appendChild(pc2);
+      var gf = document.createElement('link');
+      gf.rel = 'stylesheet';
+      gf.href = 'https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap';
+      document.head.appendChild(gf);
+    }
+
+    /* Referrer-Policy */
     var rpMeta = document.createElement('meta');
     rpMeta.name = 'referrer';
     rpMeta.content = 'strict-origin-when-cross-origin';
     document.head.appendChild(rpMeta);
+
+
+    /* Favicon */
+    var favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.type = 'image/png';
+    favicon.href = '/img/medos-favicon.png';
+    document.head.appendChild(favicon);
 
     /* Header: prepend to <body> */
     document.body.insertAdjacentHTML('afterbegin', buildHeader());
@@ -269,10 +276,23 @@
     /* Init cookie banner */
     initCookieBanner();
 
-    /* Load chatbot widget */
-    var chatbotScript = document.createElement('script');
-    chatbotScript.src = 'js/chatbot.js';
-    document.body.appendChild(chatbotScript);
+    /* Load chatbot only on first user interaction (reduces unused JS on initial load) */
+    var chatbotLoaded = false;
+    function loadChatbot() {
+      if (chatbotLoaded) return;
+      chatbotLoaded = true;
+      var s = document.createElement('script');
+      s.src = 'js/chatbot.min.js';
+      document.body.appendChild(s);
+    }
+    ['scroll', 'click', 'keydown', 'touchstart'].forEach(function(ev) {
+      document.addEventListener(ev, loadChatbot, { once: true, passive: true });
+    });
+    /* Also load on "Asistanınız" button click immediately */
+    var chatBtns = document.querySelectorAll('.alt-btn--chat, [onclick*="MedosChat"]');
+    chatBtns.forEach(function(btn) {
+      btn.addEventListener('click', loadChatbot, { once: true });
+    });
   }
 
   /* ──────────────────── Cookie Banner Logic ───────────────────────────── */
