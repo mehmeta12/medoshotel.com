@@ -201,7 +201,7 @@
       <p>
         <span data-lang="tr">Bu web sitesi, size daha iyi bir deneyim sunmak için çerezler kullanmaktadır. Çerezler hakkında daha fazla bilgi almak için</span>
         <span data-lang="en" hidden>This website uses cookies to provide you with a better experience. For more information about cookies, please read our</span>
-        <a href="docs/Medos_Hotel_%C3%87erez_Politikas%C4%B1.pdf" target="_blank" rel="noopener noreferrer">
+        <a href="docs/Medos_Hotel_Cerez_Politikasi.pdf" target="_blank" rel="noopener noreferrer">
           <span data-lang="tr">Çerez Politikamızı</span>
           <span data-lang="en" hidden>Cookie Policy</span>
         </a>

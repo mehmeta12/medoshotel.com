@@ -53,7 +53,7 @@ window._T_tr = {
   'breadcrumb.places': 'Gezilecek Yerler',
   'hero.eyebrow': 'Güzelçamlı · Kuşadası · Ege',
   'hero.title': 'Denizin sesi,<br>doğanın gölgesi',
-  'hero.title2': 'Erken rezervasyonda<br>%25\'e varan indirim',
+  'hero.title2': 'Erken rezervasyonda<br>25%\'e varan indirim',
   'about.label': 'Biz Kimiz',
   'about.title': 'Güzelçamlı\'da Denize Sıfır Aile Oteli',
   'about.p1': 'Kuşadası\'nın incisi Güzelçamlı\'da, masmavi Ege kıyısında konumlanan Medos Beach Hotel, denize sıfır konumu, doğayla iç içe atmosferi ve konforlu yapısıyla misafirlerine unutulmaz bir tatil deneyimi sunar. Güzelçamlı\'da otel arayanlar için ideal bir seçenek olan otelimiz, <strong>49 oda ve 150 yatak</strong> kapasitesiyle hem dinlenmek hem de bölgeyi keşfetmek isteyen misafirlerini yılın her döneminde ağırlamaya hazırdır.',
