@@ -100,6 +100,7 @@
       localStorage.setItem(LANG_KEY, lang);
       window.MEDOS.lang = lang;
       applyLang(lang);
+      document.dispatchEvent(new CustomEvent('medos:langchange', { detail: lang }));
     });
   }
 

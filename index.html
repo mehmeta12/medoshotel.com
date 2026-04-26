@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://www.medoshotel.com/img/medos-beach-hotel-guzelcamli.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://elfsightcdn.com">
+
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.min.css">
   <script>(function(){var loaded=false;function load(){if(loaded)return;loaded=true;(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WHNJZ96W');}['click','scroll','keydown','touchstart'].forEach(function(e){document.addEventListener(e,load,{once:true,passive:true});});})();</script>
@@ -57,7 +57,27 @@
     <section class="section reviews-section" id="yorumlar">
       <div class="container">
         <h2 class="section-title" data-i18n="reviews.title">Misafirlerimiz Ne Diyor</h2>
-        <div class="elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40" data-elfsight-app-lazy></div>
+        <div id="ti-widget-wrap"></div>
+        <script>
+        (function () {
+          var TI_IDS = { tr: 'a5af8ee70279528bce165adb7d8', en: 'd553e8e7051a528a3d2662d79f4' };
+          var loaded = null;
+          function loadTrustindex(lang) {
+            if (lang === loaded) return;
+            loaded = lang;
+            var wrap = document.getElementById('ti-widget-wrap');
+            wrap.innerHTML = '';
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://cdn.trustindex.io/loader.js?' + TI_IDS[lang];
+            wrap.appendChild(s);
+          }
+          loadTrustindex(localStorage.getItem('medos_lang') || 'tr');
+          document.addEventListener('medos:langchange', function (e) {
+            loadTrustindex(e.detail);
+          });
+        })();
+        </script>
       </div>
     </section>
 
@@ -319,45 +339,7 @@
   <script src="js/i18n.min.js"></script>
   <script src="js/layout.min.js"></script>
   <script src="js/main.min.js"></script>
-  <script src="https://elfsightcdn.com/platform.js" async></script>
   <script>
-  (function(){
-    var map = {
-      'Read more':'Devamını oku','Show less':'Daha az göster',
-      'Reviews':'Yorumlar','Review':'Yorum',
-      'Write a review':'Yorum yaz','See all reviews':'Tüm yorumları gör',
-      'Based on':'Toplam','reviews':'yorum',
-      'Powered by':'','a week ago':'1 hafta önce','a month ago':'1 ay önce',
-      'a year ago':'1 yıl önce','ago':'önce',
-      'days ago':'gün önce','months ago':'ay önce','years ago':'yıl önce',
-      'week ago':'hafta önce','month ago':'ay önce','year ago':'yıl önce',
-      'an hour ago':'1 saat önce','hours ago':'saat önce','hour ago':'saat önce',
-      'a day ago':'1 gün önce','minutes ago':'dakika önce','minute ago':'dakika önce',
-      'just now':'az önce',
-      'What Our Customers Say':'Misafirlerimiz Ne Diyor',
-      'What our customers say':'Misafirlerimiz Ne Diyor'
-    };
-    var widget = document.querySelector('.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40');
-    if (!widget) return;
-    function translate(node) {
-      if (node.nodeType === 3) {
-        var t = node.textContent;
-        Object.keys(map).forEach(function(en) {
-          t = t.replace(new RegExp('\\b' + en + '\\b', 'g'), map[en]);
-        });
-        if (t !== node.textContent) node.textContent = t;
-      } else if (node.nodeType === 1 && node.childNodes) {
-        node.childNodes.forEach(translate);
-      }
-    }
-    var obs = new MutationObserver(function(mutations) {
-      mutations.forEach(function(m) {
-        m.addedNodes.forEach(translate);
-      });
-      translate(widget);
-    });
-    obs.observe(widget, { childList: true, subtree: true });
-  })();
   </script>
 </body>
 </html>

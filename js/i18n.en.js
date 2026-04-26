@@ -25,6 +25,7 @@ window._T_en = {
   'footer.address': 'Zeus Cumhuriyet Sk No: 5, Güzelçamlı Mh., 09430 Kuşadası, Aydın, Turkey',
   'footer.copyright': 'All rights reserved.',
   'footer.developed_by': 'Developed by',
+  'footer.developer': 'Designed and developed by <a href="https://decigent.com" target="_blank" rel="noopener noreferrer">Decigent Artificial Intelligence and Information Technologies</a>.',
   'footer.documents': 'Documents',
   'footer.cookie_policy': 'Cookie Policy',
   'footer.privacy_notice': 'Privacy Notice',

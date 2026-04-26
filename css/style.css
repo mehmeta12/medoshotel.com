@@ -293,75 +293,52 @@ address { font-style: normal; }
   margin-inline-start: var(--space-sm);
 }
 
-/* Language switcher */
-.lang-switcher {
-  position: relative;
-}
-
-.lang-btn {
+/* Language toggle */
+.lang-toggle {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  font-family: var(--ff-main);
-  font-size: .85rem;
-  font-weight: var(--fw-semibold);
-  color: rgba(255,255,255,.9);
-  background: rgba(255,255,255,.12);
+  background: rgba(255,255,255,.15);
   border: 1px solid rgba(255,255,255,.25);
   border-radius: var(--radius-full);
-  padding: 0.35rem 0.75rem;
+  padding: 3px;
+  gap: 2px;
+}
+
+.lang-toggle-btn {
+  font-family: var(--ff-main);
+  font-size: .8rem;
+  font-weight: var(--fw-semibold);
+  color: rgba(255,255,255,.6);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 4px 11px;
   cursor: pointer;
   transition: background var(--tr-fast), color var(--tr-fast);
+  line-height: 1.2;
 }
 
-.lang-btn:hover {
-  background: rgba(255,255,255,.22);
+.lang-toggle-btn[aria-current="true"] {
+  background: white;
+  color: var(--clr-secondary);
 }
 
-.site-header.scrolled .lang-btn {
-  color: var(--clr-text);
+.lang-toggle-btn:hover:not([aria-current="true"]) {
+  color: white;
+}
+
+.site-header.scrolled .lang-toggle {
   background: var(--clr-light);
   border-color: #dde3ea;
 }
 
-.chevron {
-  transition: transform var(--tr-fast);
+.site-header.scrolled .lang-toggle-btn {
+  color: #a0aab4;
 }
 
-.lang-btn[aria-expanded="true"] .chevron {
-  transform: rotate(180deg);
-}
-
-.lang-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  background: var(--clr-white);
-  border: 1px solid #dde3ea;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-  min-width: 130px;
-  overflow: hidden;
-  z-index: 100;
-}
-
-.lang-dropdown.open {
-  display: block;
-  animation: fadeInDown 0.18s ease;
-}
-
-.lang-dropdown li a {
-  display: block;
-  padding: 0.6rem 1rem;
-  font-size: .9rem;
-  color: var(--clr-text);
-  transition: background var(--tr-fast);
-}
-
-.lang-dropdown li a:hover {
-  background: var(--clr-light);
-  color: var(--clr-primary);
+.site-header.scrolled .lang-toggle-btn[aria-current="true"] {
+  background: var(--clr-primary);
+  color: white;
 }
 
 /* Nav dropdowns */
