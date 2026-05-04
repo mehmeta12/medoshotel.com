@@ -1383,11 +1383,93 @@ address { font-style: normal; }
   }
 }
 
-/* ──────────────────── 20. Elfsight widget başlık gizle ─────────────── */
-.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 .eapps-google-reviews-title,
-.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 [class*="title"],
-.elfsight-app-f92edc21-67ed-4c18-8d1c-ae10e32c3c40 [class*="header"] {
-  display: none !important;
+/* ──────────────────── 20. GUEST REVIEW CARDS ───────────────────────── */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.review-card {
+  background: var(--clr-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,177,201,.12);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.review-stars {
+  color: #f59e0b;
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  line-height: 1;
+}
+
+.review-text {
+  font-size: .93rem;
+  line-height: 1.7;
+  color: var(--clr-text);
+  margin: 0;
+  flex: 1;
+}
+
+.review-footer {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding-top: .75rem;
+  border-top: 1px solid rgba(0,0,0,.06);
+  margin-top: auto;
+}
+
+.review-name {
+  font-weight: var(--fw-semibold);
+  color: var(--clr-dark);
+  font-size: .88rem;
+}
+
+.review-meta {
+  font-size: .78rem;
+  color: var(--clr-muted);
+}
+
+.reviews-cta-wrap {
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+.reviews-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--clr-primary);
+  font-weight: var(--fw-medium);
+  font-size: .95rem;
+  text-decoration: none;
+  transition: gap .2s;
+}
+
+.reviews-cta-link:hover {
+  gap: .7rem;
+  text-decoration: underline;
+}
+
+@media (max-width: 1150px) {
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .reviews-grid { grid-template-columns: 1fr; }
 }
 
 /* ──────────────────── 21. PRINT ─────────────────────────────────────── */

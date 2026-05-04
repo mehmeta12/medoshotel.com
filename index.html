@@ -53,31 +53,70 @@
       <a href="#hakkimizda" class="scroll-indicator" aria-label="Aşağı kaydır"><span></span></a>
     </section>
 
-    <!-- ═══ GOOGLE REVIEWS ═══ -->
+    <!-- ═══ GUEST REVIEWS ═══ -->
     <section class="section reviews-section" id="yorumlar">
       <div class="container">
         <h2 class="section-title" data-i18n="reviews.title">Misafirlerimiz Ne Diyor</h2>
-        <div id="ti-widget-wrap"></div>
-        <script>
-        (function () {
-          var TI_IDS = { tr: 'a5af8ee70279528bce165adb7d8', en: 'd553e8e7051a528a3d2662d79f4' };
-          var loaded = null;
-          function loadTrustindex(lang) {
-            if (lang === loaded) return;
-            loaded = lang;
-            var wrap = document.getElementById('ti-widget-wrap');
-            wrap.innerHTML = '';
-            var s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://cdn.trustindex.io/loader.js?' + TI_IDS[lang];
-            wrap.appendChild(s);
-          }
-          loadTrustindex(localStorage.getItem('medos_lang') || 'tr');
-          document.addEventListener('medos:langchange', function (e) {
-            loadTrustindex(e.detail);
-          });
-        })();
-        </script>
+        <div class="reviews-grid">
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="4 yıldız">★★★★☆</div>
+            <blockquote class="review-text" data-i18n="reviews.r6.text">Geçen yıl çok beğenip bu yıl tekrar geldik ve bir hafta kaldık. Huzurlu, ailece tatil yapabileceğiniz bir yer. Tekne turu ve iskele harika. Mutfak ekibine ve tüm personele çok teşekkürler.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Eda Ç.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+            <blockquote class="review-text" data-i18n="reviews.r2.text">Personel çok ilgiliydi — odamı tam deniz manzaralı bir odayla değiştirdiler. Havuz alanı güneş şezlongu ve bar ile çok güzel. Kahvaltı Türk usulü ve bolca seçenekle geldi. Kesinlikle tekrar geleceğim.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Chris C.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+            <blockquote class="review-text" data-i18n="reviews.r3.text">Tüm personel çok sıcak ve yardımseverdi. Yemekler doyurucu ve lezzetliydi, konum denize çok yakın. Milli Park ve Zeus Mağarası kesinlikle görülmesi gereken yerler. Tekrar gelmek isterim.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Ömer T.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+            <blockquote class="review-text" data-i18n="reviews.r4.text">Deniz sakin ve temiz, odalar çok temiz ve geniş. Akşam yemekleri büfe şeklinde — özellikle akşamları ev yemeği tadında, gerçekten lezzetliydi.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Ali A.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+            <blockquote class="review-text" data-i18n="reviews.r1.text">Medos Hotel mükemmel bir konumda. Odalar çok temiz, personel ilgili ve İskele Kafe özellikle gün batımında inanılmaz güzel. Gitmek istemedim, her şey için çok teşekkürler Medos Hotel.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Bülent A.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <div class="review-stars" aria-label="5 yıldız">★★★★★</div>
+            <blockquote class="review-text" data-i18n="reviews.r5.text">Sakin müzik ve personelle güzel bir atmosfer. Odalar modern ve uygun fiyata temiz. Denize iskele merdivenlerinden ulaşılıyor — sığ ve çocuklar için güvenli. En az 10 km'lik plaj yürüyüş yolu ve bisiklet güzergahı var.</blockquote>
+            <footer class="review-footer">
+              <span class="review-name">Diren Ö.</span>
+              <span class="review-meta" data-i18n="reviews.source">TripAdvisor</span>
+            </footer>
+          </article>
+
+        </div>
+        <p class="reviews-cta-wrap">
+          <a class="reviews-cta-link" href="https://www.tripadvisor.com/Hotel_Review-g10456715-d2716778-Reviews-Medos_Hotel-Guzelcamli_Kusadasi_Turkish_Aegean_Coast.html" target="_blank" rel="noopener noreferrer" data-i18n="reviews.view_all">Tüm Yorumları Gör →</a>
+        </p>
       </div>
     </section>
 

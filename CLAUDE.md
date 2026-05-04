@@ -1,7 +1,7 @@
 # Medos Hotel Website — Project Context
 
 > **Canlı tutulur:** Her kod değişikliğinden sonra bu dosya güncellenir.  
-> Son güncelleme: 2026-04-19
+> Son güncelleme: 2026-05-04
 
 ---
 
